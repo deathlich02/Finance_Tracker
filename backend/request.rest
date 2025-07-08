@@ -1,0 +1,131 @@
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJhZGl0eWEiLCJpYXQiOjE3NTE5NTEwNTAsImV4cCI6MTc1MjU1NTg1MH0.AzAPK_nG-HxzVZ4bspG70cmeSd_-xiHobGIXmylSyW8
+
+
+### GET LOGIN PAGE
+GET {{baseUrl}}/auth/login
+
+
+### GET REGISTER PAGE
+GET {{baseUrl}}/auth/register
+
+
+### LOGIN
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "aditya",
+  "password": "1234"
+}
+
+
+### REGISTER
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "aditya",
+  "email": "test@gmail.com",
+  "password": "1234"
+}
+
+
+### GET ALL EXPENSES
+GET {{baseUrl}}/api/expenses
+Authorization: Bearer {{token}}
+
+
+### ADD EXPENSE
+POST {{baseUrl}}/api/expenses
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Groceries",
+  "amount": 500,
+  "category": "Food"
+}
+
+
+### UPDATE EXPENSE (id = 1)
+PUT {{baseUrl}}/api/expenses/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Groceries Updated",
+  "amount": 600,
+  "category": "Essentials"
+}
+
+
+### DELETE EXPENSE (id = 1)
+DELETE {{baseUrl}}/api/expenses/1
+Authorization: Bearer {{token}}
+
+
+### GET ALL INCOMES
+GET {{baseUrl}}/api/incomes
+Authorization: Bearer {{token}}
+
+
+### ADD INCOME
+POST {{baseUrl}}/api/incomes
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Salary",
+  "amount": 25000
+}
+
+
+### UPDATE INCOME (id = 1)
+PUT {{baseUrl}}/api/incomes/3
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Freelance Payment",
+  "amount": 10000
+}
+
+
+### DELETE INCOME (id = 1)
+DELETE {{baseUrl}}/api/incomes/3
+Authorization: Bearer {{token}}
+
+
+### GET ALL DEBTS
+GET {{baseUrl}}/api/debts
+Authorization: Bearer {{token}}
+
+
+### ADD DEBT
+POST {{baseUrl}}/api/debts
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Laptop EMI",
+  "total": 45000,
+  "dueDate": "2025-08-01T00:00:00.000Z"
+}
+
+
+### UPDATE DEBT (id = 1)
+PUT {{baseUrl}}/api/debts/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Laptop EMI (Updated)",
+  "total": 43000,
+  "dueDate": "2025-08-15T00:00:00.000Z"
+}
+
+
+### DELETE DEBT (id = 1)
+DELETE {{baseUrl}}/api/debts/1
+Authorization: Bearer {{token}}

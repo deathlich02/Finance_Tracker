@@ -16,3 +16,7 @@ backend/dist/
 # Prisma
 backend/prisma/dev.db
 backend/generated/
+
+
+#steps:
+# https://chatgpt.com/s/t_686abca9c31881918dc2631d1236c91b
