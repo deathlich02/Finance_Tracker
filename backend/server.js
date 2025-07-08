@@ -4,6 +4,7 @@ import authRouter from './routes/authRouter.js'
 import apiRouter from './routes/apiRouter.js'
 import passport from 'passport'
 import passportInit from './config/passportConfig.js'
+import cors from 'cors'
 
 
 dotenv.config()
@@ -11,6 +12,10 @@ const app = express()
 passportInit(passport)
 app.use(express.json())
 app.use(passport.initialize())
+app.use(cors({
+    origin: "http://localhost:5173", // frontend at 5173
+    credentials: true               // allow cookies/auth headers 
+  }));
 
 //routes go here
 
