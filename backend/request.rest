@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJhZGl0eWEiLCJpYXQiOjE3NTE5NTEwNTAsImV4cCI6MTc1MjU1NTg1MH0.AzAPK_nG-HxzVZ4bspG70cmeSd_-xiHobGIXmylSyW8
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJhZGl0eWEiLCJpYXQiOjE3NTIwMDg0ODEsImV4cCI6MTc1MjYxMzI4MX0.3thHrP3_wo8hKD9mlHPM2WlSO0xR6MMl0MncfnLFmb0
 
 
 ### GET LOGIN PAGE
@@ -128,4 +128,67 @@ Authorization: Bearer {{token}}
 
 ### DELETE DEBT (id = 1)
 DELETE {{baseUrl}}/api/debts/1
+Authorization: Bearer {{token}}
+
+
+###GOAL RELATED STUFF
+
+### GET ALL GOALS
+GET {{baseUrl}}/goal
+Authorization: Bearer {{token}}
+
+### ADD A BUDGET GOAL
+POST {{baseUrl}}/goal/budget
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "category": "Health",
+  "targetAmount": 3000,
+  "startDate": "2025-07-01T00:00:00.000Z",
+  "endDate": "2025-07-31T00:00:00.000Z"
+}
+
+### UPDATE A BUDGET GOAL 
+PUT {{baseUrl}}/goal/budget/4
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "category": "Health & Fitness",
+  "targetAmount": 3500,
+  "startDate": "2025-07-01T00:00:00.000Z",
+  "endDate": "2025-07-31T00:00:00.000Z"
+}
+
+### DELETE A BUDGET GOAL 
+DELETE {{baseUrl}}/goal/budget/4
+Authorization: Bearer {{token}}
+
+### ADD A SAVING GOAL
+POST {{baseUrl}}/goal/saving
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Trip to Japan",
+  "targetAmount": 100000,
+  "currentSaved": 20000,
+  "deadline": "2025-12-31T00:00:00.000Z"
+}
+
+### UPDATE A SAVING GOAL 
+PUT {{baseUrl}}/goal/saving/3
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Trip to Japan (Updated)",
+  "targetAmount": 120000,
+  "currentSaved": 25000,
+  "deadline": "2026-01-15T00:00:00.000Z"
+}
+
+### DELETE A SAVING GOAL 
+DELETE {{baseUrl}}/goal/saving/3
 Authorization: Bearer {{token}}

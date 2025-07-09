@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import authRouter from './routes/authRouter.js'
 import apiRouter from './routes/apiRouter.js'
+import goalRouter from './routes/goalRouter.js'
 import passport from 'passport'
 import passportInit from './config/passportConfig.js'
 import cors from 'cors'
@@ -22,6 +23,7 @@ app.use(cors({
 // /auth will handle login and register
 app.use('/auth', authRouter)
 app.use('/api', apiRouter)
+app.use('/goal',goalRouter)
 
 app.listen(process.env.PORT, ()=> {
     console.log("Server is listening")

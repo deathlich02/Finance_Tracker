@@ -1,73 +1,69 @@
 import prisma from "./db.js";
 
 async function main() {
-
-  let user = await prisma.user.findUnique({
+  const user = await prisma.user.upsert({
     where: { username: "aditya" },
+    update: {},
+    create: {
+      email: "aditya@example.com",
+      username: "aditya",
+      password: "hashed_password"
+    }
   });
 
-  if (!user) {
-    user = await prisma.user.create({
-      data: {
-        email: "aditya@example.com",
-        username: "aditya",
-        password: "hashed_password", 
-      },
-    });
-  }
-
-  const getDateMonthsAgo = (monthsAgo) => {
-    const date = new Date();
-    date.setMonth(date.getMonth() - monthsAgo);
-    return date;
-  };
-
-
-  await prisma.income.createMany({
-    data: [
-      { userId: user.id, name: "Salary", amount: 5000, date: getDateMonthsAgo(3) },
-      { userId: user.id, name: "Freelance", amount: 1500, date: getDateMonthsAgo(3) },
-      { userId: user.id, name: "Salary", amount: 5000, date: getDateMonthsAgo(2) },
-      { userId: user.id, name: "Bonus", amount: 1000, date: getDateMonthsAgo(2) },
-      { userId: user.id, name: "Salary", amount: 5000, date: getDateMonthsAgo(1) },
-      { userId: user.id, name: "Gift", amount: 500, date: getDateMonthsAgo(0) },
-    ],
-  });
-
-  
-  await prisma.expense.createMany({
-    data: [
-      { userId: user.id, name: "Rent", category: "Housing", amount: 1200, date: getDateMonthsAgo(3) },
-      { userId: user.id, name: "Groceries", category: "Food", amount: 400, date: getDateMonthsAgo(3) },
-      { userId: user.id, name: "Electricity", category: "Utilities", amount: 300, date: getDateMonthsAgo(2) },
-      { userId: user.id, name: "Dining", category: "Food", amount: 200, date: getDateMonthsAgo(2) },
-      { userId: user.id, name: "Internet", category: "Utilities", amount: 150, date: getDateMonthsAgo(1) },
-      { userId: user.id, name: "Shopping", category: "Misc", amount: 700, date: getDateMonthsAgo(0) },
-    ],
-  });
-
-  await prisma.debt.createMany({
+  // Budget Goals
+  await prisma.budgetGoal.createMany({
     data: [
       {
         userId: user.id,
-        name: "Car Loan",
-        total: 3000,
-        dueDate: new Date(new Date().setMonth(new Date().getMonth() + 1)),
+        category: "Food",
+        targetAmount: 5000,
+        startDate: new Date("2025-07-01"),
+        endDate: new Date("2025-07-31")
       },
       {
         userId: user.id,
-        name: "Credit Card",
-        total: 1200,
-        dueDate: new Date(new Date().setMonth(new Date().getMonth() + 2)),
+        category: "Transport",
+        targetAmount: 2000,
+        startDate: new Date("2025-07-01"),
+        endDate: new Date("2025-07-31")
       },
-    ],
+      {
+        userId: user.id,
+        category: "Entertainment",
+        targetAmount: 1500,
+        startDate: new Date("2025-07-01"),
+        endDate: new Date("2025-07-31")
+      }
+    ]
   });
 
-  console.log(" Seeded ");
+  // Saving Goals
+  await prisma.savingGoal.createMany({
+    data: [
+      {
+        userId: user.id,
+        name: "Emergency Fund",
+        targetAmount: 10000,
+        currentSaved: 3000,
+        deadline: new Date("2025-12-31")
+      },
+      {
+        userId: user.id,
+        name: "Vacation",
+        targetAmount: 8000,
+        currentSaved: 2000,
+        deadline: new Date("2025-10-15")
+      }
+    ]
+  });
 }
 
 main()
-  .then(() => prisma.$disconnect())
+  .then(() => {
+    console.log(" Seeded successfully");
+    return prisma.$disconnect();
+  })
   .catch((e) => {
     console.error(" Seed error:", e);
     return prisma.$disconnect();

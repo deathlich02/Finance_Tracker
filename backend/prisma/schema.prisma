@@ -22,6 +22,8 @@ model User {
   incomes  Income[]
   expenses Expense[]
   debts    Debt[]
+  budgetGoals  BudgetGoal[]
+  savingGoals  SavingGoal[]
 }
 
 model Income {
@@ -55,3 +57,30 @@ model Debt {
   user      User     @relation(fields: [userId], references: [id])
 }
 
+// Stuff for insights and analysis
+
+
+//budget for each category
+model BudgetGoal {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  category    String
+  targetAmount Float
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime  @default(now())
+
+  user        User      @relation(fields: [userId], references: [id])
+}
+
+model SavingGoal {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  name        String
+  targetAmount Float
+  currentSaved Float    @default(0)
+  deadline    DateTime
+  createdAt   DateTime  @default(now())
+
+  user        User      @relation(fields: [userId], references: [id])
+}
