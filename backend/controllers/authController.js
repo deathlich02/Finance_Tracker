@@ -56,7 +56,7 @@ async function postRegister (req,res) {
         res.status(201).json({ message: "User registered successfully", user: { id: user.id, username: user.username } })
     } catch (error) {
         if (error.code === "P2002") {
-            return res.status(409).json({ error: "Username or email already exists" })
+            return res.status(409).json({ message: "Username or email already exists" })
         }
         res.status(500).json({ error: "Something went wrong" })
     }
