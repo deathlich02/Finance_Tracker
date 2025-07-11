@@ -11,9 +11,9 @@ A full-stack web app that helps you track expenses, incomes, debts, set budget &
 *  Fully **responsive design**
 *  Built with a clean modular architecture (frontend & backend)
 
-## 📸 Screenshots
+## 🎥 Demo
 
-> *(Add real screenshots from your app in a `/screenshots` folder.)*
+![Demo GIF](./assets/demo.gif)
 
 ---
 
