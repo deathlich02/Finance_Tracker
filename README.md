@@ -13,7 +13,7 @@ A full-stack web app that helps you track expenses, incomes, debts, set budget &
 
 ## 🎥 Demo
 
-![Demo GIF](./assets/demo.gif)
+![Demo GIF](./assets/Finance_Tracker.gif)
 
 ---
 
